@@ -1,12 +1,26 @@
 package chapter2
 
-func removeDupsWithBuffer(l *List) {
+import (
+	"github.com/exced/CtCI6-Go/libs/list"
+)
+
+func removeDupsWithBuffer(l *list.List) *list.List {
 	buffer := make(map[int]bool)
-	for e := l.Front(); e != nil; e = e.Next() {
-		if buffer[e.Value] {
-			l.MoveAfter(e, e.Next())
+	n := l.Head
+	for n != nil {
+		if buffer[n.Value] {
+			if n.Next != nil {
+				n.Next.Prev = n.Prev
+			}
+			if n.Prev != nil {
+				n.Prev.Next = n.Next
+			}
+			l.Len--
 		} else {
-			buffer[e.Value] = true
+			buffer[n.Value] = true
 		}
+		l.Tail = n
+		n = n.Next
 	}
+	return l
 }

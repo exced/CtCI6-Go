@@ -1,7 +1,7 @@
 package chapter1
 
 import (
-	math "github.com/exced/CtCI-6/libs/math"
+	"github.com/exced/CtCI6-Go/libs/math"
 )
 
 func oneEditAway(str1, str2 string) bool {

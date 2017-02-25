@@ -1,22 +1,26 @@
 package chapter2
 
 import (
+	"reflect"
 	"testing"
+
+	"github.com/exced/CtCI6-Go/libs/list"
 )
 
-func TestIsStringRotation(t *testing.T) {
+func TestRemoveDupsWithBuffer(t *testing.T) {
 	cases := []struct {
-		in1  string
-		in2  string
-		want bool
+		in1  *list.List
+		want *list.List
 	}{
-		{"", "", true},
-		{"waterbottle", "erbottlewat", true},
+		{list.New([]int{}), list.New([]int{})},
+		{list.New([]int{0}), list.New([]int{0})},
+		{list.New([]int{0, 1, 2}), list.New([]int{0, 1, 2})},
+		{list.New([]int{1, 1}), list.New([]int{1})},
 	}
 	for _, c := range cases {
-		got := isStringRotation(c.in1, c.in2)
-		if got != c.want {
-			t.Errorf("isStringRotation(%q, %q) == %q, want %q", c.in1, c.in2, got, c.want)
+		got := removeDupsWithBuffer(c.in1)
+		if !reflect.DeepEqual(got, c.want) {
+			t.Errorf("RemoveDupsWithBuffer(%v) == %v, want %v", c.in1, got, c.want)
 		}
 	}
 }
