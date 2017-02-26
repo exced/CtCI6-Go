@@ -19,7 +19,10 @@ func kthToEnd(l *list.List, k int) *list.List {
 			n = n.Prev
 		}
 	}
-	newTail := l.Tail
+	newTail := &list.Node{
+		Prev:  l.Tail.Prev,
+		Value: l.Tail.Value,
+	}
 	if k == l.Len-1 {
 		newTail.Prev = nil
 	}

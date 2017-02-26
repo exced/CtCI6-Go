@@ -17,12 +17,13 @@ func TestKthToEnd(t *testing.T) {
 		{list.New([]int{0, 1, 2}), 0, list.New([]int{0, 1, 2})},
 		{list.New([]int{0, 1, 2}), 1, list.New([]int{1, 2})},
 		{list.New([]int{0, 1, 2}), 2, list.New([]int{2})},
-		{list.New([]int{0, 1, 2, 3, 4, 5}), 2, list.New([]int{2, 3, 4, 5})},
+		{list.New([]int{0, 1, 2, 3, 4, 5}), 0, list.New([]int{0, 1, 2, 3, 4, 5})},
+		{list.New([]int{0, 1, 2, 3, 4, 5}), 4, list.New([]int{4, 5})},
 	}
 	for _, c := range cases {
 		got := kthToEnd(c.in1, c.in2)
 		if !reflect.DeepEqual(got, c.want) {
-			t.Errorf("kthToEnd(%v, %v) = %v, want %v", c.in1, c.in2, got, c.want)
+			t.Errorf("kthToEnd(%v, %v) = %v, want %v", c.in1, c.in2, got.Head, c.want.Head)
 		}
 	}
 }

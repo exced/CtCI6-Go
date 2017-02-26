@@ -3,6 +3,10 @@
 // interview exercises and show he can creates this package himself.
 package list
 
+import (
+	"errors"
+)
+
 // Node stores the data and the links between previous and next.
 type Node struct {
 	Next, Prev *Node
@@ -41,6 +45,25 @@ func (l *List) init(vals []int) *List {
 // New initializes the list by pushing the input array
 func New(vals []int) *List {
 	return new(List).init(vals)
+}
+
+// NodeAt returns the node at index position : [0:l.Len)
+func (l *List) NodeAt(index int) (*Node, error) {
+	if index < 0 || index > l.Len-1 {
+		return nil, errors.New("index not accessible in this list")
+	}
+	n := l.Head
+	if index <= (l.Len - index) { // Head to Tail
+		for i := 0; i < index; i++ {
+			n = n.Next
+		}
+	} else { // Tail to Head
+		n = l.Tail
+		for i := 0; i < l.Len-index-1; i++ {
+			n = n.Prev
+		}
+	}
+	return n, nil
 }
 
 // ToArray turns the list into an int array of values between head and tail

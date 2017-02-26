@@ -79,3 +79,39 @@ func TestToArray(t *testing.T) {
 		}
 	}
 }
+
+func TestNodeAt(t *testing.T) {
+	n0l1 := &Node{
+		Value: 0,
+	}
+	n1l1 := &Node{
+		Prev:  n0l1,
+		Value: 1,
+	}
+	n2l1 := &Node{
+		Prev:  n1l1,
+		Value: 2,
+	}
+	n0l1.Next = n1l1
+	n1l1.Next = n2l1
+	l1 := &List{
+		Head: n0l1,
+		Tail: n2l1,
+		Len:  3,
+	}
+	cases := []struct {
+		in1  int
+		want *Node
+		err  error
+	}{
+		{0, n0l1, nil},
+		{1, n1l1, nil},
+		{2, n2l1, nil},
+	}
+	for _, c := range cases {
+		got, gotErr := l1.NodeAt(c.in1)
+		if gotErr != nil && !reflect.DeepEqual(got, c.want) {
+			t.Errorf("(%v).NodeAt(%v) == %v, want %v", l1, c.in1, got, c.want)
+		}
+	}
+}
