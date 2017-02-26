@@ -16,11 +16,14 @@ func TestRemoveDupsWithBuffer(t *testing.T) {
 		{list.New([]int{0}), list.New([]int{0})},
 		{list.New([]int{0, 1, 2}), list.New([]int{0, 1, 2})},
 		{list.New([]int{1, 1}), list.New([]int{1})},
+		{list.New([]int{1, 1, 1}), list.New([]int{1})},
+		{list.New([]int{1, 1, 1, 2}), list.New([]int{1, 2})},
+		{list.New([]int{1, 2, 1, 2}), list.New([]int{1, 2})},
 	}
 	for _, c := range cases {
-		got := removeDupsWithBuffer(c.in1)
-		if !reflect.DeepEqual(got, c.want) {
-			t.Errorf("RemoveDupsWithBuffer(%v) == %v, want %v", c.in1, got, c.want)
+		removeDupsWithBuffer(c.in1)
+		if !reflect.DeepEqual(c.in1, c.want) {
+			t.Errorf("RemoveDupsWithBuffer(%v), want %v", c.in1.Tail, c.want.Tail)
 		}
 	}
 }
