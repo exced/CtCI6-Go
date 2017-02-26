@@ -42,3 +42,16 @@ func (l *List) init(vals []int) *List {
 func New(vals []int) *List {
 	return new(List).init(vals)
 }
+
+// ToArray turns the list into an int array of values between head and tail
+func (l *List) ToArray() []int {
+	vals := make([]int, l.Len)
+	n := l.Head
+	i := 0
+	for n != nil {
+		vals[i] = n.Value
+		i++
+		n = n.Next
+	}
+	return vals
+}

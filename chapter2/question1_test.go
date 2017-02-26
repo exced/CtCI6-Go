@@ -23,7 +23,7 @@ func TestRemoveDupsWithBuffer(t *testing.T) {
 	for _, c := range cases {
 		removeDupsWithBuffer(c.in1)
 		if !reflect.DeepEqual(c.in1, c.want) {
-			t.Errorf("RemoveDupsWithBuffer(%v), want %v", c.in1.Tail, c.want.Tail)
+			t.Errorf("RemoveDupsWithBuffer(%v), want %v", c.in1, c.want)
 		}
 	}
 }

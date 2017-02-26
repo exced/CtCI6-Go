@@ -62,3 +62,20 @@ func TestNew(t *testing.T) {
 		}
 	}
 }
+
+func TestToArray(t *testing.T) {
+	cases := []struct {
+		in1  *List
+		want []int
+	}{
+		{New([]int{}), []int{}},
+		{New([]int{0}), []int{0}},
+		{New([]int{0, 1, 2, 3, 4}), []int{0, 1, 2, 3, 4}},
+	}
+	for _, c := range cases {
+		got := c.in1.ToArray()
+		if !reflect.DeepEqual(got, c.want) {
+			t.Errorf("ToArray(%v) = %v, want %v", c.in1, got, c.want)
+		}
+	}
+}
