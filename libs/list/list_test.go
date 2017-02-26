@@ -110,7 +110,7 @@ func TestNodeAt(t *testing.T) {
 	}
 	for _, c := range cases {
 		got, gotErr := l1.NodeAt(c.in1)
-		if gotErr != nil && !reflect.DeepEqual(got, c.want) {
+		if gotErr != nil || !reflect.DeepEqual(got, c.want) {
 			t.Errorf("(%v).NodeAt(%v) == %v, want %v", l1, c.in1, got, c.want)
 		}
 	}
